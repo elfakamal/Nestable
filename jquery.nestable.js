@@ -251,9 +251,10 @@
     dragStart: function(e)
     {
       var mouse    = this.mouse,
-        target   = $(e.target),
-        dragItem = target.closest(this.options.itemNodeName);
+          target   = $(e.target),
+          dragItem = target.closest(this.options.itemNodeName);
 
+      this.el.trigger('drag-start', dragItem);
       this.placeEl.css('height', dragItem.height());
 
       mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
@@ -277,9 +278,11 @@
         'left' : e.pageX - mouse.offsetX,
         'top'  : e.pageY - mouse.offsetY
       });
+
       // total depth of dragging item
       var i, depth,
-        items = this.dragEl.find(this.options.itemNodeName);
+          items = this.dragEl.find(this.options.itemNodeName);
+
       for (i = 0; i < items.length; i++) {
         depth = $(items[i]).parents(this.options.listNodeName).length;
         if (depth > this.dragDepth) {
