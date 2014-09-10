@@ -300,10 +300,12 @@
       this.placeEl.replaceWith(el);
 
       this.dragEl.remove();
-      this.el.trigger('change', el);
-      if (this.hasNewRoot) {
-        this.dragRootEl.trigger('change', el);
-      }
+
+      if (this.hasNewRoot)
+        this.dragRootEl.trigger('change-side', el);
+      else
+        this.el.trigger('change', el);
+
       this.reset();
     },
 
